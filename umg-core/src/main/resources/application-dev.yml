@@ -1,0 +1,130 @@
+server:
+  port: 8010
+
+spring:
+  application:
+      name: umg-core-dev
+  datasource:
+      url: jdbc:mysql://10.83.16.14:3306/umg-test?characterEncoding=utf-8&&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: Xfx2018@)!*
+      driver-class-name: com.mysql.jdbc.Driver
+      platform: mysql
+      type: com.alibaba.druid.pool.DruidDataSource
+      # 初始化大小，最小，最大
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,log4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      #useGlobalDataSourceStat: true
+  redis:
+      password: Xfx2018@)!*
+      database: 0
+      port: 6379
+      host: 10.83.16.12
+      lettuce:
+        pool:
+          max-idle: 8
+          min-idle: 0
+          max-active: 8
+          max-wait: -1ms
+      timeout: 10000ms
+  jpa:
+      # 配置 DBMS 类型
+      database: MYSQL
+      # 配置是否将执行的 SQL 输出到日志
+#      show-sql: true
+#      properties:
+#        hibernate:
+#          hbm2ddl:
+#            # 配置开启自动更新表结构
+#            auto: update
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    registry-fetch-interval-seconds: 3
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+          defaultZone: http://10.83.0.20:9876/eureka/,http://10.83.0.73:9876/eureka/
+  instance:
+    prefer-ip-address: true
+    appname: umg-core
+    lease-expiration-duration-in-seconds: 5
+    lease-renewal-interval-in-seconds: 3
+    health-check-url-path: /actuator/health
+
+
+mail:
+  port: 25
+  host: 10.83.0.44
+  username: um-sit@weshareholdings.com.cn
+  password: Ws2018!08@
+  protocol: smtp
+  debug: false
+  re_port: 143
+  re_protocol: imap
+  # (s)
+  task_timeoffset: 60
+  task_fromtrem: Mail Delivery System
+  # (KB)
+  task_mailsize: 1024
+  smtp:
+    starttls:
+      enable: true
+      required: false
+    timeout: 25000
+    auth: true
+
+sms:
+   monUserid: JC2363
+   monPwd: 112311
+   monApikey:
+   monEncryptPwd: true
+   monPaths: http://61.145.229.29:9002,http://112.91.147.37:9002
+   length: 10
+   txcAppid: 1400207261
+   txcAppkey: c96552c0248a5b0e4006d6ca0bc37394
+   reportNum: 50
+   retry: 0
+   maxretry: 0
+   warnMails: mudong.xiao@weshareholdings.com,finley.li@weshareholdings.com
+   appCode: 1008
+
+rmq:
+  namesrvaddr: 10.83.0.38:9876
+  subsystemcode: 5005
+  orgcode: 00
+  sms-request-dest: 00-03-5001-0
+  sms-details-dest: 00-03-5002-0
+
+
+thread:
+  pool:
+    corePoolSize: 3
+    queueCapacity: 30
+    maxPoolSize: 5
+    keepAliveSeconds: 120
+
+

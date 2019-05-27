@@ -1,0 +1,49 @@
+server:
+  port: 8010
+
+spring:
+  application:
+     name: umg-core
+  datasource:
+     username: umg
+     password: kt&Nc1k6CuKMa&YK
+     driver-class-name: com.mysql.jdbc.Driver
+     url: jdbc:mysql://10.80.16.18:3306/umg?characterEncoding=utf-8&&zeroDateTimeBehavior=convertToNull
+
+
+eureka:
+   client:
+       healthcheck:
+           enabled: true
+       registry-fetch-interval-seconds: 3
+       register-with-eureka: true
+       fetch-registry: true
+       service-url:
+           defaultZone: http://10.80.0.50:9876/eureka/,http://10.80.0.139:9876/eureka/
+   instance:
+     prefer-ip-address: true
+     appname: umg-core
+     lease-expiration-duration-in-seconds: 5
+     lease-renewal-interval-in-seconds: 3
+     health-check-url-path: /actuator/health
+
+mail:
+  port: 25
+  host: 10.80.0.133
+  username: um@weshareholdings.com.cn
+  password: BXUo7gzCyl
+  protocol: smtp
+  debug: false
+  re_port: 143
+  re_protocol: imap
+  # (s)
+  task_timeoffset: 60
+  task_fromtrem: Mail Delivery System
+  # (KB)
+  task_mailsize: 1024
+  smtp:
+    starttls:
+      enable: true
+      required: false
+    timeout: 25000
+    auth: true

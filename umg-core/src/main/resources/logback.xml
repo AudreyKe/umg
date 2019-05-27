@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <!--<property name="LOG_HOME" value="d://data/logs/umg"/>-->
+    <property name="LOG_HOME" value="/data/logs/umg"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender" >
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%p]%c[%L]: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STORE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/umg-store-info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/umg-store-info.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STORE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/umg-store-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/umg-store-error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/umg-log-info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/umg-log-info.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%p]%c[%L]: %msg%n</pattern>
+        </encoder>
+        <filter class = "ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/umg-log-warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/umg-log-warn.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%p]%c[%L]: %msg%n</pattern>
+        </encoder>
+        <filter class = "ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/umg-log-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/umg-log-error.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%p]%c[%L]: %msg%n</pattern>
+        </encoder>
+        <filter class = "ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/umg-log-debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/umg-log-debug.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%p]%c[%L]: %msg%n</pattern>
+        </encoder>
+        <filter class = "ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+
+
+    <logger name="org.hibernate.SQL">
+        <level value="DEBUG"/>
+    </logger>
+    <logger name="org.hibernate.engine.QueryParameters">
+        <level value="DEBUG"/>
+    </logger>
+    <logger name="org.hibernate.engine.query.HQLQueryPlan">
+        <level value="c"/>
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder">
+        <level value="TRACE"/>
+    </logger>
+
+    <logger name="store-info" additivity="false">
+        <appender-ref ref="STORE-INFO"/>
+    </logger>
+
+    <logger name="store-error" additivity="false">
+        <appender-ref ref="STORE-ERROR"/>
+    </logger>
+
+    <logger name="com.weshare.network">
+        <level value="DEBUG"/>
+    </logger>
+
+    <!--    <logger name="org.springframework">
+            <level value="WARN"/>
+        </logger>-->
+
+    <!--<logger name="com.netflix">-->
+        <!--<level value="WARN"/>-->
+    <!--</logger>-->
+
+
+    <!--<logger name="log4j.logger.org.springframework.jdbc" additivity="true">-->
+        <!--<level value="DEBUG" />-->
+    <!--</logger>-->
+    <!--<logger name="log4j.logger.org.springframework.jdbc" additivity="true">-->
+        <!--<level value="Trace" />-->
+    <!--</logger>-->
+
+    <!--<logger name="java.sql.Connection" additivity="true">-->
+        <!--<level value="DEBUG" />-->
+    <!--</logger>-->
+    <!--<logger name="java.sql.Statement" additivity="true">-->
+        <!--<level value="DEBUG" />-->
+        <!--<appender-ref ref="DEBUG" />-->
+    <!--</logger>-->
+    <!--<logger name="java.sql.PreparedStatement" additivity="true">-->
+        <!--<level value="DEBUG" />-->
+    <!--</logger>-->
+    <!--<logger name="java.sql.ResultSet" additivity="true">-->
+        <!--<level value="DEBUG" />-->
+    <!--</logger>-->
+
+
+    <!-- 相当于logger元素，只是name值已经确定为root了 -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="INFO" />
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+</configuration>
